@@ -18,17 +18,10 @@ RUN echo $(/usr/bin/env java -XshowSettings:properties -version 2>&1 | grep "jav
 ENV CATALINA_HOME /usr/share/tomcat8
 ENV CATALINA_BASE /speech_recognition/service/tomcat
 
+COPY requirements.txt requirements.txt
+
 # Установка необходимых python-библиотек
-RUN pip install --upgrade pip \
-	tqdm \
-	pandas \
-	matplotlib \
-	seaborn \
-	librosa \
-	sox \
-	pysubs2 \
-	flask \
-	soundfile
+RUN pip install --upgrade pip && pip install --upgrade -r requirements.txt  
 
 # Working folder preparation
 RUN mkdir speech_recognition	
